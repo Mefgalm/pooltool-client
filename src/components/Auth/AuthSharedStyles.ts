@@ -51,7 +51,7 @@ export const PageTitle = styled.div`
     align-self: center;
 `
 
-export const PageRedirectInfo = styled.div`
+export const PageSubtitle = styled.div`
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -60,10 +60,6 @@ export const PageRedirectInfo = styled.div`
     align-self: center;
     color: #B6B6CC;
     margin-bottom: 2vh;
-    & > a {
-        font-size: 14px;
-        color: #1365FC;
-    }
 `
 
 export const Input = styled.input`

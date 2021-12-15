@@ -6,10 +6,10 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import SignIn from './components/Auth/SignIn/SignIn';
+import SignIn from './components/Auth/SignIn';
 import { createGlobalStyle, ThemeProvider } from "styled-components"
 import lightTheme from './light-theme';
-import SignUp from './components/Auth/SignIn/SignUp';
+import SignUp from './components/Auth/SignUp';
 
 const GlobalStyle = createGlobalStyle`
   body {

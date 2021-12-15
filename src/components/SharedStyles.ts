@@ -43,3 +43,9 @@ export const SecondaryButton = styled.button`
 
     background-color: #fff;
 `
+
+export const Ref = styled.a`
+    font-size: 14px;
+    color: #1365FC;
+    text-decoration: none;
+`

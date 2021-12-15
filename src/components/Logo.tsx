@@ -11,7 +11,7 @@ const TitleWithImage = styled.div`
 export default function Logo() {
     return (
         <TitleWithImage>
-            <img src={question} />
+            <img src={question} width="30px"/>
             <h2>PoolTool</h2>
         </TitleWithImage>
     )
