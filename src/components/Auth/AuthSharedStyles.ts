@@ -46,7 +46,7 @@ export const PageTitle = styled.div`
     font-weight: bold;
     font-size: 24px;
     line-height: 1.15;
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     font-feature-settings: 'pnum' on, 'lnum' on;
     align-self: center;
 `

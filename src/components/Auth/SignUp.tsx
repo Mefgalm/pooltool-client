@@ -59,7 +59,7 @@ export default function SignUp() {
                             <Input type="email" placeholder="e.x. support@pooltool.com"></Input>
                             <Label>Email</Label>
                         </LabelWithInput>
-                        <PasswordInputWithHits value={password} onTextChanged={onPasswordChanged}></PasswordInputWithHits>
+                        <PasswordInputWithHits label={"Password"} value={password} onTextChanged={onPasswordChanged}></PasswordInputWithHits>
                     </Inputs>
                     <PrimaryButton>Log In</PrimaryButton>
                     <ConfirmPrivacyPolicy>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import dialogClose from '../images/dialogClose.svg';
 
@@ -44,10 +44,25 @@ const ModalContent = styled.div`
 `
 
 export default function Dialog({ open, onClose, children }: { open: boolean, onClose: (() => void), children?: React.ReactNode; }) {
+    const divRef = useRef<HTMLDivElement>(null);
+
+    const checkIfClickedOutside = (e: MouseEvent) => {
+        if (open && divRef.current && !divRef.current.contains(e.target as HTMLElement)) {
+            onClose();
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("mousedown", checkIfClickedOutside)
+        return () => {
+            document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    })
+
     return (
         <Modal open={open}>
-            <ModalContent id="modalContent">
-                <div>
+            <ModalContent>
+                <div ref={divRef}>
                     <Close onClick={onClose}></Close>
                     <ModalBox>
                         {children}

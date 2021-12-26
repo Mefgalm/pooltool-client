@@ -28,7 +28,7 @@ const PasswordWithLabel = styled(LabelWithInput)`
     }
 `
 
-export default function PasswordInput({ value, onTextChanged }: { value: string, onTextChanged: (val: string) => void }) {
+export default function PasswordInput({ label, value, onTextChanged }: { label: string, value: string, onTextChanged: (val: string) => void }) {
     const [hidePassword, setHidePassword] = React.useState<boolean>(true);
 
     function localTextChanged(e: React.ChangeEvent<HTMLInputElement>) {
@@ -39,7 +39,7 @@ export default function PasswordInput({ value, onTextChanged }: { value: string,
         <div>
             <PasswordWithLabel>
                 <Input type={hidePassword ? 'password' : 'text'} placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" value={value} onChange={localTextChanged}></Input>
-                <Label>Password</Label>
+                <Label>{label}</Label>
                 {hidePassword ? <Eye onClick={() => setHidePassword(false)}></Eye> : <EyeOff onClick={() => setHidePassword(true)}></EyeOff>}
             </PasswordWithLabel>
         </div>

@@ -5,6 +5,7 @@ import PasswordInput from "./PasswordInput";
 const PasswordHints = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 3vh;
     gap: 0.5em;
     @media (max-width: 768px) {
         display: flex;
@@ -27,12 +28,12 @@ const PasswordHint = styled.label<{ valid: boolean }>`
     }
 `
 
-const oneLowercaseRegex = new RegExp(/^(?=.*[a-z\d]).*$/);
+const oneLowercaseRegex = new RegExp(/^(?=.*[a-z]).*$/);
 const lenghtRegex = new RegExp(/^.{8,}$/);
 const oneUppercaseRegex = new RegExp(/^(?=.*[A-Z]).*$/);
 const oneSpecialRegex = new RegExp(/^(?=.*[!@#$%^&*()№:?[\]\-_~/\\.,]).*$/);
 
-export default function PasswordInputWithHits({ value, onTextChanged }: { value: string, onTextChanged: (val: string) => void }) {
+export default function PasswordInputWithHits({ label, value, onTextChanged }: { label: string, value: string, onTextChanged: (val: string) => void }) {
     const [oneLowercaseValid, setOneLowercaseValid] = React.useState<boolean>(false);
     const [lenghtValid, setLenghtValid] = React.useState<boolean>(false);
     const [oneUppercaseValid, setOneUppercaseValid] = React.useState<boolean>(false);
@@ -49,7 +50,7 @@ export default function PasswordInputWithHits({ value, onTextChanged }: { value:
 
     return (
         <div>
-            <PasswordInput value={value} onTextChanged={localTextChanged}></PasswordInput>
+            <PasswordInput label={label} value={value} onTextChanged={localTextChanged}></PasswordInput>
             <PasswordHints>
                 <PasswordHint valid={oneLowercaseValid}>One lowercase character</PasswordHint>
                 <PasswordHint valid={lenghtValid}>8 characters minimum</PasswordHint>
