@@ -11,6 +11,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components"
 import lightTheme from './light-theme';
 import SignUp from './components/Auth/SignUp';
 import ResetPassword from './components/Auth/ResetPassword';
+import ConfirmPassword from './components/Auth/ConfirmPassword';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/confirm-password" element={<ConfirmPassword />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
