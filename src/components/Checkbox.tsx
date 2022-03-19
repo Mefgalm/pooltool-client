@@ -29,10 +29,15 @@ const LocalCheckbox = styled.input`
     }
 `
 
-export default function Checkbox() {
+export default function Checkbox({ checked, onChange }: { checked: boolean, onChange: () => void }) {
+
+    function localOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+        onChange();
+    }
+
     return (
         <div>
-            <LocalCheckbox type="checkbox"></LocalCheckbox>
+            <LocalCheckbox type="checkbox" checked={checked} onChange={localOnChange}></LocalCheckbox>
             <label></label>
         </div>
     )

@@ -7,7 +7,7 @@ export const PrimaryButton = styled.button`
     align-items: center;
     padding: 2vh 2vw;
 
-    background: #1365FC;
+    background: ${props => props.disabled ? '#B6B6CC' : '#1365FC'} ;
     border: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 

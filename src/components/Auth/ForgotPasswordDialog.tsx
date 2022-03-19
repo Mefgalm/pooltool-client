@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Dialog from "../Dialog";
+import { forgotPasswordReq } from '../../Api';
 import { PrimaryButton } from "../SharedStyles";
 import { Input, Label, LabelWithInput, PageSubtitle, PageTitle } from "./AuthSharedStyles";
 import SimpleDialog from "./SimpleDialog";
@@ -15,19 +16,43 @@ const ForgotPasswordBox = styled.div`
     }
 `
 
+
+
 export default function ForgotPasswordDialog({ open, onClose }: { open: boolean, onClose: (() => void) }) {
+    const [email, setEmail] = React.useState<string>("");
     const [sentDialogOpen, setSentDialogOpen] = React.useState<boolean>(false);
+
+    async function onSentDialog() {
+        if (!email) {
+            return;
+        }
+
+        const result = await forgotPasswordReq(email);
+        if (result.code === "ok") {
+            setSentDialogOpen(true);
+            localOnClose();
+        }  else {
+            console.error("ForgotPasswordReq: " + result.message);
+        }
+    }
+
+    function localOnClose() {
+        setEmail("");
+        onClose();
+    }
+
+
     return (
         <>
-            <Dialog open={open} onClose={onClose}>
+            <Dialog open={open} onClose={localOnClose}>
                 <ForgotPasswordBox>
                     <PageTitle>Forgot your password?</PageTitle>
                     <PageSubtitle>Enter the email address associated with your accaunt</PageSubtitle>
                     <LabelWithInput>
-                        <Input type="email" placeholder="e.x. support@pooltool.com"></Input>
+                        <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="e.x. support@pooltool.com"></Input>
                         <Label>Email</Label>
                     </LabelWithInput>
-                    <PrimaryButton onClick={() => setSentDialogOpen(true)}>Reset Password</PrimaryButton>
+                    <PrimaryButton onClick={onSentDialog}>Reset Password</PrimaryButton>
                 </ForgotPasswordBox>
             </Dialog>
             <SimpleDialog pageTitle="Email has been sent!"

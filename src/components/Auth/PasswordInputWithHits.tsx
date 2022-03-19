@@ -33,19 +33,25 @@ const lenghtRegex = new RegExp(/^.{8,}$/);
 const oneUppercaseRegex = new RegExp(/^(?=.*[A-Z]).*$/);
 const oneSpecialRegex = new RegExp(/^(?=.*[!@#$%^&*()№:?[\]\-_~/\\.,]).*$/);
 
-export default function PasswordInputWithHits({ label, value, onTextChanged }: { label: string, value: string, onTextChanged: (val: string) => void }) {
+export default function PasswordInputWithHits({ label, value, onTextChanged }:
+    { label: string, value: string, onTextChanged: (val: string, valid: boolean) => void }) {
     const [oneLowercaseValid, setOneLowercaseValid] = React.useState<boolean>(false);
     const [lenghtValid, setLenghtValid] = React.useState<boolean>(false);
     const [oneUppercaseValid, setOneUppercaseValid] = React.useState<boolean>(false);
     const [oneSpecialValid, setOneSpecialValid] = React.useState<boolean>(false);
 
     function localTextChanged(value: string) {
-        setOneLowercaseValid(oneLowercaseRegex.test(value));
-        setLenghtValid(lenghtRegex.test(value));
-        setOneUppercaseValid(oneUppercaseRegex.test(value));
-        setOneSpecialValid(oneSpecialRegex.test(value));
+        const oneLowerValid = oneLowercaseRegex.test(value);
+        const lenghtValid = lenghtRegex.test(value);
+        const oneUpperValid = oneUppercaseRegex.test(value);
+        const oneSpecialValid = oneSpecialRegex.test(value);  
 
-        onTextChanged(value);
+        setOneLowercaseValid(oneLowerValid);
+        setLenghtValid(lenghtValid);
+        setOneUppercaseValid(oneUpperValid);
+        setOneSpecialValid(oneSpecialValid);
+
+        onTextChanged(value, oneLowerValid && lenghtValid && oneUpperValid && oneSpecialValid);
     }
 
     return (

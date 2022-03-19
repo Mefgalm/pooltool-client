@@ -8,7 +8,6 @@ const TitleWithImage = styled.div`
     display: flex;
     flex-direction: row;
     margin: 0;
-    margin-bottom: 4vh;    
 `;
 
 const Image = styled.img.attrs<{ onClick: (_: React.MouseEventHandler<HTMLImageElement>) => void }>(props => ({

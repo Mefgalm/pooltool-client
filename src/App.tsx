@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter,
@@ -12,6 +11,7 @@ import lightTheme from './light-theme';
 import SignUp from './components/Auth/SignUp';
 import ResetPassword from './components/Auth/ResetPassword';
 import Dashboard from './components/Dashboard';
+import PrivateRoute from './components/PrivateRoute';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,7 +33,9 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route element={<PrivateRoute></PrivateRoute>}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

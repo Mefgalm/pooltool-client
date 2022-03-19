@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { SignInReq } from '../../Api';
+import { signInReq } from '../../Api';
 import Logo from '../Logo';
 import { PrimaryButton, Ref, SecondaryButton } from '../SharedStyles';
 import { PageSubtitle, Illustration, Input, Label, LabelWithInput, SignBox, PageAndLogoBox, PageTitle } from './AuthSharedStyles';
@@ -35,19 +35,24 @@ const ErrorMessage = styled.p`
     color: red;
 `
 
+const LogoMargin = styled.div`
+    margin-bottom: 4vh;    
+`
+
 export default function SignIn() {
     const [password, setPassword] = React.useState<string>("");
     const [email, setEmail] = React.useState<string>("");
     const [forgotPasswordOpen, setForgotPasswordOpen] = React.useState<boolean>(false);
-    const [emailSentDialogOpen, setEmailSentDialogOpen] = React.useState<boolean>(false);
 
     const [invalidEmailOrPassword, setInvalidEmailOrPassword] = React.useState<boolean>(false);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     async function onSignInClicked(): Promise<void> {
-        const result = await SignInReq(email, password);
+
+        const result = await signInReq(email, password);
         if (result.code === "ok") {
+            localStorage.setItem("token", result.result.token);
             navigate("/dashboard");
         } else {
             setInvalidEmailOrPassword(true);
@@ -57,7 +62,9 @@ export default function SignIn() {
     return (
         <SignInPage>
             <PageAndLogoBox>
-                <Logo />
+                <LogoMargin>
+                    <Logo />
+                </LogoMargin>
                 <SignBox>
                     <PageTitle>Log In</PageTitle>
                     <PageSubtitle>Don't have an account? <Ref href="/sign-up">Sign up</Ref></PageSubtitle>
